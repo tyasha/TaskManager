@@ -3,8 +3,9 @@ package org.yakov.model;
 import org.yakov.util.IdProvider;
 
 public abstract class User {
-    private final String id;
+    private  String id;
 
+    public User(){}
     public User(IdProvider idProvider) {
         this.id = idProvider.generateId();
     }
