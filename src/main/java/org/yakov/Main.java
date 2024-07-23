@@ -17,8 +17,13 @@ public class Main {
     public CommandLineRunner commandLineRunner() {
         return args -> {
             IdProvider idProvider = () -> {
-                int id = (int) (Math.random() * Integer.MAX_VALUE);
-                return String.valueOf(id);
+                int seed = (int) (System.currentTimeMillis() & 0xFFFF);
+                final int a = 1103515245;
+                final int c = 12345;
+                final int m = Integer.MAX_VALUE;
+
+                seed = (a * seed + c) & m;
+                return String.valueOf(seed);
             };
 
             CommonUser user = new CommonUser(idProvider);
