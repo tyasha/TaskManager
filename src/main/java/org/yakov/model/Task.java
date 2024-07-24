@@ -3,13 +3,14 @@ package org.yakov.model;
 import org.yakov.util.IdProvider;
 
 public abstract class Task {
-    private final String id;
+    private String id;
 
-    public Task(IdProvider idProvider) {
+    private String description;
+
+    private User user;
+
+    public Task(IdProvider idProvider, String description) {
         this.id = idProvider.generateId();
-    }
-
-    public String getId() {
-        return id;
+        this.description = description;
     }
 }
