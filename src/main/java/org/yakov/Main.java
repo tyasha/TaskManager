@@ -1,5 +1,6 @@
 package org.yakov;
 
+import jakarta.annotation.PostConstruct;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,16 +14,19 @@ public class Main {
         SpringApplication.run(Main.class, args);
     }
 
-    @Bean
-    public CommandLineRunner commandLineRunner() {
-        return args -> {
-            IdProvider idProvider = () -> {
-                int id = (int) (Math.random() * Integer.MAX_VALUE);
-                return String.valueOf(id);
-            };
+    @PostConstruct
+    public void startMethod() {
+        IdProvider idProvider = () -> {
+            int seed = (int) (System.currentTimeMillis() & 0xFFFF);
+            final int a = 1103515245;
+            final int c = 12345;
+            final int m = Integer.MAX_VALUE;
 
-            CommonUser user = new CommonUser(idProvider);
-            System.out.println("Generated User ID: " + user.getId());
+            seed = (a * seed + c) & m;
+            return String.valueOf(seed);
         };
+
+        CommonUser user = new CommonUser(idProvider);
+        System.out.println("Generated User ID: " + user.getId());
     }
 }

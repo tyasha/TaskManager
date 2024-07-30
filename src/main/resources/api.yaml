@@ -1,0 +1,45 @@
+openapi: 3.0.1
+info:
+  title: Task Manager API
+  description: API для управления задачами и пользователями
+  version: 1.0.0
+paths:
+  /tasks/{id}:
+    get:
+      tags:
+        - getTask
+      summary: Получение Task по ID
+      description: Получение Task по заданному ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID задачи
+      responses:
+        '200':
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+        '404':
+          description: Задача не найдена
+components:
+  schemas:
+    Task:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Уникальный идентификатор задачи
+        name:
+          type: string
+          description: Название задачи
+        description:
+          type: string
+          description: Описание задачи
+        status:
+          type: string
+          description: Статус задачи
