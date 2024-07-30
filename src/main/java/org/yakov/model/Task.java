@@ -1,16 +1,16 @@
 package org.yakov.model;
 
-import org.yakov.util.IdProvider;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import org.yakov.util.Generator;
 
+@NoArgsConstructor
+@RequiredArgsConstructor
+@Data
 public abstract class Task {
-    private String id;
-
-    private String description;
-
+    private String id = Generator.getRandomId();
+    @JsonIgnore
     private User user;
-
-    public Task(IdProvider idProvider, String description) {
-        this.id = idProvider.generateId();
-        this.description = description;
-    }
 }
