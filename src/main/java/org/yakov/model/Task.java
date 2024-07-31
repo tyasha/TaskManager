@@ -7,10 +7,9 @@ import lombok.RequiredArgsConstructor;
 import org.yakov.util.Generator;
 
 @NoArgsConstructor
-@RequiredArgsConstructor
 @Data
 public abstract class Task {
-    private String id = Generator.getRandomId();
+    private String id = Generator.getRandomId(this);
     @JsonIgnore
     private User user;
 }

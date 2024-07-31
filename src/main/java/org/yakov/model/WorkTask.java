@@ -1,8 +1,8 @@
 package org.yakov.model;
 
-import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
+@RequiredArgsConstructor
 public class WorkTask extends Task {
-    @NonNull
-    private String description;
+    private final String description;
 }
